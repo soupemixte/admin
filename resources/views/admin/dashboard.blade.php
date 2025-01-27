@@ -4,7 +4,7 @@
 
 <main class="flex-center">
     <section class="structure">
-        <h1 class="page-title">Bonjour, {{ Auth::guard('admin')->user()->name }}</h1>
+        <h1 class="page-title">Bonjour,</h1>
       
         <div class="scraping-controls results">
             <h2>Votre collection actuelle dans l'application : <span id="total-bottles">{{ $totalBottles }}</span> bouteilles</h2>
