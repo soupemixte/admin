@@ -1,0 +1,37 @@
+
+/* .header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--spacing-medium);
+    text-align: center;
+    font-size: 1.5em;
+} */
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--header-bg);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    
+}
+
+.header .logo {
+    display: flex;
+    justify-content: center;
+}
+
+.header .logo img {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+}s
+.welcome-user p{ 
+    color: white;
+}
+.welcome-user span{ 
+    color: var(--accent-color);
+}
+
