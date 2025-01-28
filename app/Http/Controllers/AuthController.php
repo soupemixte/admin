@@ -21,16 +21,16 @@ class AuthController extends Controller
     /**
      * Show the user login form.
      */
-    public function showUserLoginForm()
+   /*  public function showUserLoginForm()
     {
         return view('auth.user-login'); // View for user login
 
-    }
+    } */
 
     /**
      * Handle user login.
      */
-    public function userLogin(Request $request)
+  /*   public function userLogin(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users',
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return redirect()->route('user.login')->withErrors('Combinaison e-mail / mot de passe incorrecte.');
         }
 
-    }
+    } */
 
     /**
      * Show the admin login form.

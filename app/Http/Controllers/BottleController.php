@@ -84,18 +84,23 @@ class BottleController extends Controller
     {
         set_time_limit(0);
         // Set the "scraping" flag to true
-        Cache::put('scraping', true, 60);
+        Cache::put('scraping', true);
         $client = new Client();
         $nextUrl = "https://www.saq.com/fr/produits/vin";
-        while ($nextUrl && Cache::get('scraping')) {
+        while ($nextUrl) {
+            //Check the "scraping" flag before processing each page
+            if (!Cache::get('scraping')) {
+                Cache::forget('scraping');
+                return response()->json(['success' => true, 'message' => 'Extraction arrêtée par l\'utilisateur.']);
+            }
             $nextUrl = $this->scrapeSAQWines($nextUrl, $client);
+
+            usleep(100000);
         }
         // Reset the "scraping" flag
         Cache::forget('scraping');
-        if (!Cache::get('scraping')) {
-            //
-            return response()->json(['success' => true, 'message' => 'Extraction arrêtée par l\'utilisateur.']);
-        }
+
+        
         //
         return response()->json(['success' => true, 'message' => 'Extraction terminée avec succès !']);
     }
@@ -103,9 +108,9 @@ class BottleController extends Controller
 
     public function stopScraping() {
         // Set the scraping flag to false
-        Cache::put('scraping', false);
+        Cache::forget('scraping');
         //
-        return response()->json(['success' => true, 'message' => 'Extraction arrêtée avec succès !']);
+        return response()->json(['success' => true, 'message' => 'Extraction arrêtée par l\'utilisateur.']);
     }
 
 
@@ -116,6 +121,11 @@ class BottleController extends Controller
     {
         $crawler = $client->request('GET', $url);
         $crawler->filter('li.product-item')->each(function ($node) use ($client) {
+
+            // Check the "scraping" flag during processing
+            if (!Cache::get('scraping')) {
+                return false; 
+            }
             // Extract the title
             $titleNode = $node->filter('a.product-item-link');
             $title = $titleNode->count() ? trim($titleNode->text()) : 'N/A';
@@ -128,7 +138,7 @@ class BottleController extends Controller
             // Extract the image source URL
             $imageNode = $node->filter('.product-image-photo');
             $imageSrc = $imageNode->count() ? $imageNode->attr('src') : 'N/A';
-            echo "Détails de l'extraction pour : $title | $saqLink\n";
+            
     
             // Visit the detailed page to extract the SAQ code
             $detailedData = $this->scrapeBouteilleDetails($saqLink, $client);

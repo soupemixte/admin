@@ -61,25 +61,19 @@
     @yield('content')
     <!-- Navigation -->
     <nav class="navigation">
-        <!-- Visible for regular users only -->
-        @auth('web')
-            <a class="nav-link" href="{{ route('user.show', Auth::id()) }}"> <img src="{{asset('img/navigation/home.svg') }}" alt="nav-image">@lang('lang.home')</a>
-            <a class="nav-link" href="{{ route('cellar.index') }}"> <img src="{{asset('img/navigation/my-collection.svg') }}" alt="nav-image">@lang('lang.cellars')</a>
-            <a class="nav-link" href="{{ route('bottle.index') }}"> <img src="{{asset('img/navigation/catalog.svg') }}" alt="nav-image">@lang('lang.bottles')</a>
-        @endauth
+        <!-- Visible for admins users only -->
         @auth('admin')
             <a class="nav-link" href="{{ route('admin.dashboard') }}"> 
                 <img src="{{asset('img/navigation/dashboard.png') }}" alt="nav-image">@lang('lang.dashboard')
             </a>
         @endauth
         @php
-    $isAdmin = Auth::guard('admin')->check(); // Check if admin is logged in
-    $isUser = Auth::guard('web')->check();    // Check if user is logged in
-@endphp
+            $isAdmin = Auth::guard('admin')->check(); // Check if admin is logged in
+        @endphp
 
-@if(!$isAdmin && !$isUser)
+@if(!$isAdmin)
   <!-- Guest: Not logged in -->
-  <a class="nav-link" href="{{ route('user.login') }}">
+  <a class="nav-link" href="{{ route('admin.login') }}">
     <img src="{{ asset('img/navigation/profile.svg') }}" alt="nav-image">@lang('lang.login')
   </a>
 @else
