@@ -38,10 +38,6 @@
             <button type="submit" class="btn-border">@lang('lang.login')</button>
         </form>
         
-        <div class="form_footer">
-            <p>@lang('lang.register_question') <a href="{{ route('user.create') }}" class="new_member">@lang('lang.register_subtitle')</a></p>
-        </div>
-        
     </section>
 </main>
 @endsection

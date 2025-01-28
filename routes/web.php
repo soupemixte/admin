@@ -15,14 +15,13 @@ use App\Http\Controllers\CellierBottleController;
 Route::get('/registration', [UserController::class, 'create'])->name('user.create');
 Route::post('/registration', [UserController::class, 'store'])->name('user.store');
 // Auth Routes
-Route::get('/connection', [AuthController::class, 'chooseConnection'])->name('auth.connection');
-Route::get('/login', [AuthController::class, 'showUserLoginForm'])->name('user.login');
-Route::post('/login', [AuthController::class, 'userLogin'])->name('user.login.submit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Authentication Routes
-Route::get('/admin/login', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.login.submit');
+/* Route::get('/admin/login', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.login.submit'); */
+Route::get('/login', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
+Route::post('/login', [AuthController::class, 'adminLogin'])->name('admin.login.submit');
 
 //Authentification de l'administrateur avec fonctionnalités autorisées pour l'administrateur
 Route::prefix('admin')->group(function () {
