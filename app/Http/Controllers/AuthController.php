@@ -30,7 +30,7 @@ class AuthController extends Controller
     /**
      * Handle user login.
      */
-  /*   public function userLogin(Request $request)
+    public function userLogin(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users',
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return redirect()->route('user.login')->withErrors('Combinaison e-mail / mot de passe incorrecte.');
         }
 
-    } */
+    }
 
     /**
      * Show the admin login form.

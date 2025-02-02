@@ -32,3 +32,12 @@
 .scraping-controls p {
     font-size: 20px;
 }
+
+
+@media only screen and (max-width: 800px) {
+    .scraping-controls .btn-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+  }

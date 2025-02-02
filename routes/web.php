@@ -18,8 +18,7 @@ Route::post('/registration', [UserController::class, 'store'])->name('user.store
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Authentication Routes
-/* Route::get('/admin/login', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.login.submit'); */
+Route::get('/', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::get('/login', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('/login', [AuthController::class, 'adminLogin'])->name('admin.login.submit');
 
